@@ -54,7 +54,7 @@ This proves the deterministic preparation/storage/query loop, not cognitive or l
 For a host supporting repository-local `.agents/skills`, copy `skills/reader-state/` there. Avoid overwriting an existing same-name installation without reviewing differences. Example from a target project, with the release path set explicitly:
 
 ```sh
-RELEASE=/absolute/path/to/reader-state-skill-0.1.0
+RELEASE=/absolute/path/to/reader-state-simulator
 mkdir -p .agents/skills
 if test -e .agents/skills/reader-state; then
   printf '%s\n' 'Existing skill found: review before replacing.' >&2
