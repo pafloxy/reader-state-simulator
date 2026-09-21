@@ -1,0 +1,231 @@
+{
+  "mode": "authored-fixture",
+  "model_calls": 0,
+  "preparation_id": "prep-7c415967cd5552789cbfc9c9431afb8400d2b04c99511046c39ef150880e296b",
+  "run_id": "run-ac65209c3cdb421997c8cc76d3e91028",
+  "reused_run": false,
+  "L3": {
+    "run_id": "run-ac65209c3cdb421997c8cc76d3e91028",
+    "step": 3,
+    "position": "L3",
+    "snapshot_hash": "9bd9d670fdf5be7aaa486fac5a7b218c9a7e6232a08d86a1ee9dec536348fd82",
+    "state": {
+      "understanding": {
+        "K0.1": {
+          "evidence": [
+            {
+              "kind": "background",
+              "ref": "b1"
+            }
+          ],
+          "justification": "background",
+          "meaning": "understood",
+          "text": "A set supports membership tests; a directed path follows the directions of its edges."
+        },
+        "K1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000001"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "understood",
+          "text": "The goal is to find vertices reachable from the start."
+        },
+        "K2": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000002"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "understood",
+          "text": "pending stores vertices waiting to be explored; it starts with the start vertex."
+        },
+        "K3": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000003"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "partial",
+          "text": "A set named seen is initialized with the start vertex. Its update and use rules have not yet been stated."
+        }
+      },
+      "expectations": {
+        "E1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000003"
+            }
+          ],
+          "text": "Explain when seen is updated and how it affects scheduling."
+        }
+      },
+      "uncertainties": {},
+      "vocabulary": {
+        "V1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000003"
+            }
+          ],
+          "status": "named",
+          "term": "seen",
+          "text": "seen is named and initialized; its operational role is not yet explained."
+        }
+      },
+      "frame": {},
+      "load": {}
+    },
+    "issues": {
+      "Q1.L3": {
+        "issue_id": "Q1.L3",
+        "introduced_at": "L3",
+        "text": "What is seen used for, and when is it updated?",
+        "category": "missing-explanation",
+        "status": "open",
+        "last_changed_step": 3,
+        "last_reason": "Only its name and initial contents are given.",
+        "evidence": [
+          {
+            "kind": "document",
+            "ref": "unit-000003"
+          }
+        ]
+      }
+    },
+    "retrieval": "exact",
+    "model_calls": 0,
+    "address_resolution": {
+      "step": 3,
+      "requested_position": "L3",
+      "resolved_position": "L3",
+      "resolution": "exact"
+    }
+  },
+  "L5": {
+    "run_id": "run-ac65209c3cdb421997c8cc76d3e91028",
+    "step": 5,
+    "position": "L5",
+    "snapshot_hash": "a7faca3462fcba82792127b9666ab9d224a99b8bd7f6c1a4535cb21f5f0ea36b",
+    "state": {
+      "understanding": {
+        "K0.1": {
+          "evidence": [
+            {
+              "kind": "background",
+              "ref": "b1"
+            }
+          ],
+          "justification": "background",
+          "meaning": "understood",
+          "text": "A set supports membership tests; a directed path follows the directions of its edges."
+        },
+        "K1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000001"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "understood",
+          "text": "The goal is to find vertices reachable from the start."
+        },
+        "K2": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000002"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "understood",
+          "text": "pending stores vertices waiting to be explored; it starts with the start vertex."
+        },
+        "K3": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000005"
+            }
+          ],
+          "justification": "supported-argument",
+          "meaning": "understood",
+          "text": "seen records vertices already scheduled. Membership is tested before scheduling and insertion happens immediately, so a vertex is not scheduled twice."
+        },
+        "K4": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000004"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "partial",
+          "text": "Exploration considers outgoing neighbors for scheduling; the selection condition is still unspecified."
+        }
+      },
+      "expectations": {},
+      "uncertainties": {},
+      "vocabulary": {
+        "V1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "unit-000005"
+            }
+          ],
+          "status": "applied",
+          "term": "seen",
+          "text": "seen is the membership guard for scheduling, updated immediately on scheduling."
+        }
+      },
+      "frame": {},
+      "load": {}
+    },
+    "issues": {
+      "Q1.L3": {
+        "issue_id": "Q1.L3",
+        "introduced_at": "L3",
+        "text": "What is seen used for, and when is it updated?",
+        "category": "missing-explanation",
+        "status": "resolved",
+        "last_changed_step": 5,
+        "last_reason": "The membership guard and immediate insertion rule answer the earlier question.",
+        "evidence": [
+          {
+            "kind": "document",
+            "ref": "unit-000005"
+          }
+        ]
+      }
+    },
+    "retrieval": "exact",
+    "model_calls": 0,
+    "address_resolution": {
+      "step": 5,
+      "requested_position": "L5",
+      "resolved_position": "L5",
+      "resolution": "exact"
+    }
+  },
+  "base_unchanged_after_dialogue": true,
+  "session_id": "session-4a483b190740499799c6f9a16926f31a",
+  "verification": {
+    "ok": true,
+    "run_id": "run-ac65209c3cdb421997c8cc76d3e91028",
+    "steps": 5,
+    "complete": true,
+    "sessions": 1,
+    "checked": "structure, references, hash chains, deterministic replay; not semantic fidelity or host isolation",
+    "preparation_binding": "verified"
+  }
+}

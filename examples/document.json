@@ -1,0 +1,48 @@
+{
+  "document_id": "reachability",
+  "revision": "demo-v1",
+  "granularity": "paragraph",
+  "source_text": "We want to find every vertex reachable from a chosen start vertex by following directed edges.\n\nKeep a collection called pending of vertices waiting to be explored. Initially it contains the start vertex.\n\nWe also keep a set called seen, initially containing the start vertex.\n\nWhen we explore a vertex, inspect each of its outgoing neighbors and consider whether to schedule that neighbor.\n\nSchedule a neighbor only if it is absent from seen, and add it to seen immediately when scheduling it. Thus no vertex is scheduled twice, even when the graph has a cycle.",
+  "units": [
+    {
+      "unit_id": "u0001",
+      "position": "L1",
+      "text": "We want to find every vertex reachable from a chosen start vertex by following directed edges.",
+      "start": 0,
+      "end": 94,
+      "kind": "prose"
+    },
+    {
+      "unit_id": "u0002",
+      "position": "L2",
+      "text": "Keep a collection called pending of vertices waiting to be explored. Initially it contains the start vertex.",
+      "start": 96,
+      "end": 204,
+      "kind": "prose"
+    },
+    {
+      "unit_id": "u0003",
+      "position": "L3",
+      "text": "We also keep a set called seen, initially containing the start vertex.",
+      "start": 206,
+      "end": 276,
+      "kind": "prose"
+    },
+    {
+      "unit_id": "u0004",
+      "position": "L4",
+      "text": "When we explore a vertex, inspect each of its outgoing neighbors and consider whether to schedule that neighbor.",
+      "start": 278,
+      "end": 390,
+      "kind": "prose"
+    },
+    {
+      "unit_id": "u0005",
+      "position": "L5",
+      "text": "Schedule a neighbor only if it is absent from seen, and add it to seen immediately when scheduling it. Thus no vertex is scheduled twice, even when the graph has a cycle.",
+      "start": 392,
+      "end": 562,
+      "kind": "prose"
+    }
+  ]
+}

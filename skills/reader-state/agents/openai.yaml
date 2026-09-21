@@ -1,0 +1,6 @@
+interface:
+  display_name: "Reader State"
+  short_description: "Save and query a reader's evolving understanding"
+  default_prompt: "Use $reader-state on this passage; reuse a matching saved trace and keep later clarification separate."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,133 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "reader-state.preparation.v1"
+    },
+    "document": {
+      "$ref": "artifact.schema.json#/$defs/document"
+    },
+    "document_digest": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "input_format": {
+          "enum": [
+            "markdown",
+            "legacy-json"
+          ]
+        },
+        "input_bytes_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "original_source_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "normalized_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "normalizer_schema": {
+          "const": "readersim.normalized-document.v0.2"
+        },
+        "projection_policy": {
+          "enum": [
+            "readersim-block-v1",
+            "readersim-sentence-v1"
+          ]
+        },
+        "offset_unit": {
+          "const": "unicode_code_point"
+        },
+        "body_start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "frontmatter_excluded": {
+          "type": "boolean"
+        },
+        "source_map": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "unit_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "position": {
+                "type": "string",
+                "minLength": 1
+              },
+              "legacy_parent": {
+                "type": "string",
+                "minLength": 1
+              },
+              "legacy_kind": {
+                "type": "string",
+                "minLength": 1
+              },
+              "normalized_start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "normalized_end": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "unit_id",
+              "position",
+              "legacy_parent",
+              "legacy_kind",
+              "normalized_start",
+              "normalized_end"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "input_format",
+        "input_bytes_sha256",
+        "original_source_name",
+        "original_source_sha256",
+        "normalized_sha256",
+        "normalizer_schema",
+        "projection_policy",
+        "offset_unit",
+        "body_start",
+        "frontmatter_excluded",
+        "source_map",
+        "warnings"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "document_digest",
+    "provenance"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Unstamped private preparation payload"
+}

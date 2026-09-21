@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.reader-state/
+.reader-state-demo/
+demo-output.json
+.env
+.venv/
+tmp/

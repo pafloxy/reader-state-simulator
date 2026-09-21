@@ -1,0 +1,27 @@
+{
+  "reader_id": "cs-undergraduate",
+  "persona": "A CS undergraduate comfortable with sets and directed graphs, but not assumed familiar with graph traversal algorithms. The name seen may suggest a purpose, but a suggestion is not an explained rule.",
+  "strictness": 1,
+  "background": [
+    {
+      "source_id": "b1",
+      "kind": "assumption",
+      "title": "Declared preparation",
+      "text": "The reader understands directed edges, paths, sets, and membership tests. Prior knowledge of graph traversal algorithms is not assumed.",
+      "limitations": "An explicit modeling assumption, not a measured individual profile."
+    }
+  ],
+  "initial_knowledge": {
+    "K0.1": {
+      "text": "A set supports membership tests; a directed path follows the directions of its edges.",
+      "meaning": "understood",
+      "justification": "background",
+      "evidence": [
+        {
+          "kind": "background",
+          "ref": "b1"
+        }
+      ]
+    }
+  }
+}

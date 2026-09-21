@@ -1,0 +1,8 @@
+{
+  "model": "authored-fixture-no-model",
+  "prompt_version": "reader-state-0.1",
+  "isolation": "fixture",
+  "context_policy": "full-prefix-v1",
+  "max_units": 50,
+  "notes": "Synthetic expected behavior; not a live-model or human validation result."
+}

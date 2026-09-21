@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Bridge operations; base calls use request.schema.json",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "prepare"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "granularity": {
+          "enum": [
+            "block",
+            "sentence"
+          ]
+        },
+        "input_format": {
+          "enum": [
+            "markdown",
+            "legacy-json"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "source",
+        "document_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "create_prepared"
+        },
+        "preparation_id": {
+          "type": "string",
+          "pattern": "^prep-[0-9a-f]{64}$"
+        },
+        "reader": {
+          "$ref": "artifact.schema.json#/$defs/reader"
+        },
+        "config": {
+          "$ref": "artifact.schema.json#/$defs/config"
+        },
+        "reviewed": {
+          "const": true
+        },
+        "reuse": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "op",
+        "preparation_id",
+        "reader",
+        "config",
+        "reviewed"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "inspect_prepared"
+        },
+        "preparation_id": {
+          "type": "string",
+          "pattern": "^prep-[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "op",
+        "preparation_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "preparation_for_run"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "op",
+        "run_id"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "resolve_at"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "position": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "op",
+        "run_id",
+        "position"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "state_at"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "position": {
+          "type": "string",
+          "minLength": 1
+        },
+        "registers": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "understanding",
+              "expectations",
+              "uncertainties",
+              "vocabulary",
+              "frame",
+              "load"
+            ]
+          }
+        }
+      },
+      "required": [
+        "op",
+        "run_id",
+        "position"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "op": {
+          "const": "query_at"
+        },
+        "run_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "position": {
+          "type": "string",
+          "minLength": 1
+        },
+        "session_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "op",
+        "run_id",
+        "position"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

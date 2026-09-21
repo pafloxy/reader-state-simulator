@@ -1,0 +1,95 @@
+test_50_reuses_original_unit_labels_and_ids (test_bridge.BridgeTests) ... ok
+test_51_frontmatter_excluded_with_exact_offsets (test_bridge.BridgeTests) ... ok
+test_52_crlf_unicode_byte_identity_and_codepoint_spans (test_bridge.BridgeTests) ... ok
+test_53_mixed_sentence_and_structural_boundaries (test_bridge.BridgeTests) ... ok
+test_54_sentence_prefix_hides_future_sentence (test_bridge.BridgeTests) ... ok
+test_55_block_trace_does_not_fake_sentence_snapshot (test_bridge.BridgeTests) ... ok
+test_56_sentence_alias_and_block_end (test_bridge.BridgeTests) ... ok
+test_57_uncompiled_boundary_rejected (test_bridge.BridgeTests) ... ok
+test_58_preparation_does_not_simulate (test_bridge.BridgeTests) ... ok
+test_59_preparation_idempotent (test_bridge.BridgeTests) ... ok
+test_60_input_review_required (test_bridge.BridgeTests) ... ok
+test_61_existing_matching_run_reused (test_bridge.BridgeTests) ... ok
+test_62_changed_source_new_identity (test_bridge.BridgeTests) ... ok
+test_63_changed_reader_new_run (test_bridge.BridgeTests) ... ok
+test_64_ambiguous_resamples_not_selected_arbitrarily (test_bridge.BridgeTests) ... ok
+test_65_original_native_normalized_json_import (test_bridge.BridgeTests) ... ok
+test_66_normalized_hash_mismatch (test_bridge.BridgeTests) ... ok
+test_67_no_silent_drop_of_linked_artifacts (test_bridge.BridgeTests) ... ok
+test_68_converted_tex_not_a_supported_input (test_bridge.BridgeTests) ... ok
+test_69_non_markdown_refused_without_converter (test_bridge.BridgeTests) ... ok
+test_70_source_files_unchanged (test_bridge.BridgeTests) ... ok
+test_71_preparation_hash_tampering_rejected (test_bridge.BridgeTests) ... ok
+test_72_run_preparation_binding_verified (test_bridge.BridgeTests) ... ok
+test_73_fresh_process_query_uses_saved_trace (test_bridge.BridgeTests) ... ok
+test_74_complete_bridge_fixture_preserves_original_question (test_bridge.BridgeTests) ... ok
+test_75_legacy_sentence_prefix_probe (test_bridge.BridgeTests) ... ok
+test_76_installable_skill_is_self_contained (test_bridge.BridgeTests) ... ok
+test_77_empty_and_metadata_only_documents_rejected (test_bridge.BridgeTests) ... ok
+test_78_unknown_boundary_rejected (test_bridge.BridgeTests) ... ok
+test_79_source_map_excludes_absolute_paths (test_bridge.BridgeTests) ... ok
+test_80_embeds_remain_unfetched_with_warning (test_bridge.BridgeTests) ... ok
+test_81_legacy_omitted_body_content_rejected (test_bridge.BridgeTests) ... ok
+test_82_legacy_extended_unit_refused (test_bridge.BridgeTests) ... ok
+test_83_l0_baseline_works (test_bridge.BridgeTests) ... ok
+test_84_data_instructions_are_not_executed (test_bridge.BridgeTests) ... ok
+test_85_legacy_module_cli_still_works (test_bridge.BridgeTests) ... ok
+test_88_bridge_schemas_well_formed (test_packaging.BridgeSchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_89_preparation_and_binding_schema (test_packaging.BridgeSchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_90_bridge_request_shapes (test_packaging.BridgeSchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_86_inherited_source_hashes_match (test_packaging.PackageTests) ... ok
+test_87_skill_is_compact_with_resolvable_local_links (test_packaging.PackageTests) ... ok
+test_45_schema_is_valid (test_schema.SchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_46_example_inputs_validate (test_schema.SchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_47_all_persisted_example_records_validate (test_schema.SchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_48_unknown_fields_rejected (test_schema.SchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_49_protocol_requests_validate (test_schema.SchemaTests) ... skipped 'optional development dependency: jsonschema'
+test_01_initial_state (test_store.StoreTests) ... ok
+test_02_fresh_instance_retrieval (test_store.StoreTests) ... ok
+test_03_carry_forward (test_store.StoreTests) ... ok
+test_04_prefix_context_excludes_suffix (test_store.StoreTests) ... ok
+test_05_future_evidence_rejected_without_commit (test_store.StoreTests) ... ok
+test_06_future_value_evidence_rejected (test_store.StoreTests) ... ok
+test_07_wrong_context_ticket_rejected (test_store.StoreTests) ... ok
+test_08_wrong_parent_rejected (test_store.StoreTests) ... ok
+test_09_idempotent_commit (test_store.StoreTests) ... ok
+test_10_conflicting_commit (test_store.StoreTests) ... ok
+test_11_out_of_order_commit (test_store.StoreTests) ... ok
+test_12_issue_history_prefix (test_store.StoreTests) ... ok
+test_13_issue_reopening (test_store.StoreTests) ... ok
+test_14_issue_origin_mismatch (test_store.StoreTests) ... ok
+test_15_comparison_is_read_only (test_store.StoreTests) ... ok
+test_16_base_clarification_rejected (test_store.StoreTests) ... ok
+test_17_dialogue_does_not_mutate_base (test_store.StoreTests) ... ok
+test_18_fresh_session_does_not_inherit (test_store.StoreTests) ... ok
+test_19_base_context_ignores_log (test_store.StoreTests) ... ok
+test_20_query_context_bound (test_store.StoreTests) ... ok
+test_21_inquiry_future_reference_rejected (test_store.StoreTests) ... ok
+test_22_conversation_source_attribution (test_store.StoreTests) ... ok
+test_23_inquiry_idempotency (test_store.StoreTests) ... ok
+test_24_stale_inquiry_head (test_store.StoreTests) ... ok
+test_25_hash_corruption (test_store.StoreTests) ... ok
+test_26_rehashed_inconsistent_snapshot_rejected (test_store.StoreTests) ... ok
+test_27_interrupted_publish_no_partial_commit (test_store.StoreTests) ... ok
+test_28_source_span_validation (test_store.StoreTests) ... ok
+test_29_source_gap_validation (test_store.StoreTests) ... ok
+test_30_same_input_distinct_runs (test_store.StoreTests) ... ok
+test_31_changed_profile_changes_identity (test_store.StoreTests) ... ok
+test_32_budget_guard (test_store.StoreTests) ... ok
+test_33_identifier_path_traversal (test_store.StoreTests) ... ok
+test_34_missing_background_ref (test_store.StoreTests) ... ok
+test_35_reject_unknown_register_and_missing_justification (test_store.StoreTests) ... ok
+test_36_fresh_process_cli_query (test_store.StoreTests) ... ok
+test_37_not_compiled_and_complete (test_store.StoreTests) ... ok
+test_38_query_wrong_session_anchor (test_store.StoreTests) ... ok
+test_39_inquiry_cannot_self_cite_answer (test_store.StoreTests) ... ok
+test_40_demo_end_to_end (test_store.StoreTests) ... ok
+test_41_duplicate_update_rejected (test_store.StoreTests) ... ok
+test_42_invalid_remove_rejected (test_store.StoreTests) ... ok
+test_43_no_nonfinite_configuration (test_store.StoreTests) ... ok
+test_44_dispatch_surface (test_store.StoreTests) ... ok
+
+----------------------------------------------------------------------
+Ran 90 tests in 0.710s
+
+OK (skipped=8)

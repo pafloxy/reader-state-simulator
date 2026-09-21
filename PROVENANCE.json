@@ -1,0 +1,64 @@
+{
+  "status": "public-release",
+  "version": "0.1.0",
+  "date": "2026-09-21",
+  "legacy_archive_sha256": "0ef062fc1587e9a9f86c377c783e5fab915463d1924cce7e761433652ef92191",
+  "rc1_archive_sha256": "538ecd57f1e9e04b58971e0e1fe49bbd006cd07b43e8315f850a04ee1884a8fa",
+  "unchanged_sources": [
+    {
+      "source_path": "src/readersim/__init__.py",
+      "packaged_path": "skills/reader-state/scripts/readersim/__init__.py",
+      "bytes": 398,
+      "sha256": "88ac6c829b49f9f9591df33fc3208f85afec89469a53645c58e25a37642102b6",
+      "change": "byte-identical"
+    },
+    {
+      "source_path": "src/readersim/__main__.py",
+      "packaged_path": "skills/reader-state/scripts/readersim/__main__.py",
+      "bytes": 200,
+      "sha256": "308e4becddafb15740a7f5a2c036cd3e481c0cd296f2e5c792b17b4582a7473a",
+      "change": "byte-identical"
+    },
+    {
+      "source_path": "src/readersim/cli.py",
+      "packaged_path": "skills/reader-state/scripts/readersim/cli.py",
+      "bytes": 3366,
+      "sha256": "5c628683d93d09bb0a7cf4135342d5ccd9a90df1e64a981d16d87b7bbe84c215",
+      "change": "byte-identical"
+    },
+    {
+      "source_path": "src/readersim/conversion.py",
+      "packaged_path": "skills/reader-state/scripts/readersim/conversion.py",
+      "bytes": 4875,
+      "sha256": "46fcbeeae6a0600035a7dc0da8b33203ac89e65f0f239d9ecae57d75b1912cc4",
+      "change": "byte-identical"
+    },
+    {
+      "source_path": "src/readersim/normalization.py",
+      "packaged_path": "skills/reader-state/scripts/readersim/normalization.py",
+      "bytes": 15875,
+      "sha256": "7a84903d8d5aa4d1b96ac762afc35e0dd3c1aa58f952573f05f11802eb1ae97b",
+      "change": "byte-identical"
+    },
+    {
+      "source_path": "src/readersim/pipeline.py",
+      "packaged_path": "skills/reader-state/scripts/readersim/pipeline.py",
+      "bytes": 10328,
+      "sha256": "4b7d8bc33c1c8a8552eb22323dafd893eda37c1a9a90b169a35cdf164a22d77d",
+      "change": "byte-identical"
+    },
+    {
+      "source_path": "RC1/skills/reader-state/scripts/reader_store.py",
+      "packaged_path": "skills/reader-state/scripts/reader_store.py",
+      "bytes": 30594,
+      "sha256": "3a7247003f7946d388774423208648f867c26215191d239d8174e4e317e2b09d",
+      "change": "byte-identical"
+    }
+  ],
+  "excluded_from_release": [
+    "legacy Python bytecode",
+    "private operating records",
+    "unprovided manuscripts/experiments"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,1440 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Reader State artifact contract 0.1",
+  "description": "Structural shape only. The reference helper additionally validates source spans, references, hashes, prefix boundaries, and issue lifecycles. This is not semantic or cognitive validation.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/run"
+    },
+    {
+      "$ref": "#/$defs/step"
+    },
+    {
+      "$ref": "#/$defs/session"
+    },
+    {
+      "$ref": "#/$defs/exchangeRecord"
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,127}$"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "position": {
+      "type": "string",
+      "pattern": "^L[1-9][0-9]*(\\.[1-9][0-9]*)?$"
+    },
+    "issueId": {
+      "type": "string",
+      "pattern": "^Q[1-9][0-9]*\\.L[1-9][0-9]*(\\.[1-9][0-9]*)?$"
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "document",
+            "background",
+            "persona",
+            "state",
+            "inquiry"
+          ]
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false
+    },
+    "baseEvidence": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "document",
+            "background",
+            "persona"
+          ]
+        },
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "ref"
+      ],
+      "additionalProperties": false
+    },
+    "value": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/baseEvidence"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "understandingValue": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/baseEvidence"
+          }
+        },
+        "meaning": {
+          "enum": [
+            "unfamiliar",
+            "partial",
+            "understood"
+          ]
+        },
+        "justification": {
+          "enum": [
+            "background",
+            "explicit-definition",
+            "supported-argument",
+            "asserted",
+            "hypothesis",
+            "contested"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "evidence",
+        "meaning",
+        "justification"
+      ],
+      "additionalProperties": false
+    },
+    "vocabularyValue": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/baseEvidence"
+          }
+        },
+        "term": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "named",
+            "explained",
+            "applied"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "evidence",
+        "term",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "loadValue": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/baseEvidence"
+          }
+        },
+        "level": {
+          "enum": [
+            "unknown",
+            "low",
+            "moderate",
+            "high"
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "evidence",
+        "level"
+      ],
+      "additionalProperties": false
+    },
+    "snapshot": {
+      "type": "object",
+      "properties": {
+        "understanding": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/understandingValue"
+          }
+        },
+        "expectations": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "uncertainties": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "vocabulary": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/vocabularyValue"
+          }
+        },
+        "frame": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "load": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/loadValue"
+          }
+        }
+      },
+      "required": [
+        "understanding",
+        "expectations",
+        "uncertainties",
+        "vocabulary",
+        "frame",
+        "load"
+      ],
+      "additionalProperties": false
+    },
+    "unit": {
+      "type": "object",
+      "properties": {
+        "unit_id": {
+          "$ref": "#/$defs/id"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "kind": {
+          "enum": [
+            "prose",
+            "heading",
+            "math",
+            "code",
+            "table",
+            "opaque"
+          ]
+        }
+      },
+      "required": [
+        "unit_id",
+        "position",
+        "text",
+        "start",
+        "end",
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "document_id": {
+          "$ref": "#/$defs/id"
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "granularity": {
+          "enum": [
+            "paragraph",
+            "sentence",
+            "explicit"
+          ]
+        },
+        "source_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "units": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/unit"
+          }
+        }
+      },
+      "required": [
+        "document_id",
+        "revision",
+        "granularity",
+        "source_text",
+        "units"
+      ],
+      "additionalProperties": false
+    },
+    "background": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "assumption",
+            "excerpt"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "kind",
+        "title",
+        "text",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "reader": {
+      "type": "object",
+      "properties": {
+        "reader_id": {
+          "$ref": "#/$defs/id"
+        },
+        "persona": {
+          "type": "string",
+          "minLength": 1
+        },
+        "strictness": {
+          "enum": [
+            1,
+            2,
+            3
+          ]
+        },
+        "background": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/background"
+          }
+        },
+        "initial_knowledge": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/id"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/understandingValue"
+          }
+        }
+      },
+      "required": [
+        "reader_id",
+        "persona",
+        "strictness",
+        "background",
+        "initial_knowledge"
+      ],
+      "additionalProperties": false
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isolation": {
+          "enum": [
+            "isolated",
+            "instruction-only",
+            "fixture"
+          ]
+        },
+        "context_policy": {
+          "const": "full-prefix-v1"
+        },
+        "max_units": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000
+        },
+        "parent_run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "sampling": {
+          "type": "object"
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "prompt_version",
+        "isolation",
+        "context_policy",
+        "max_units"
+      ],
+      "additionalProperties": false
+    },
+    "update": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "const": "understanding"
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "put"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "value": {
+              "$ref": "#/$defs/understandingValue"
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "const": "expectations"
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "put"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "value": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "const": "uncertainties"
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "put"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "value": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "const": "vocabulary"
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "put"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "value": {
+              "$ref": "#/$defs/vocabularyValue"
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "const": "frame"
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "put"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "value": {
+              "$ref": "#/$defs/value"
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "const": "load"
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "put"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "value": {
+              "$ref": "#/$defs/loadValue"
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "register": {
+              "enum": [
+                "understanding",
+                "expectations",
+                "uncertainties",
+                "vocabulary",
+                "frame",
+                "load"
+              ]
+            },
+            "item_id": {
+              "$ref": "#/$defs/id"
+            },
+            "action": {
+              "const": "remove"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            }
+          },
+          "required": [
+            "register",
+            "item_id",
+            "action",
+            "reason",
+            "evidence"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "issueEvent": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "issue_id": {
+              "$ref": "#/$defs/issueId"
+            },
+            "introduced_at": {
+              "$ref": "#/$defs/position"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "action": {
+              "const": "open"
+            },
+            "text": {
+              "type": "string",
+              "minLength": 1
+            },
+            "category": {
+              "enum": [
+                "undefined-term",
+                "missing-prerequisite",
+                "missing-explanation",
+                "ambiguity",
+                "background-conflict",
+                "convention-difference",
+                "unsupported-claim",
+                "presentation"
+              ]
+            }
+          },
+          "required": [
+            "issue_id",
+            "introduced_at",
+            "reason",
+            "evidence",
+            "action",
+            "text",
+            "category"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "issue_id": {
+              "$ref": "#/$defs/issueId"
+            },
+            "introduced_at": {
+              "$ref": "#/$defs/position"
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "evidence": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/baseEvidence"
+              }
+            },
+            "action": {
+              "enum": [
+                "resolve",
+                "reopen"
+              ]
+            }
+          },
+          "required": [
+            "issue_id",
+            "introduced_at",
+            "reason",
+            "evidence",
+            "action"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "delta": {
+      "type": "object",
+      "properties": {
+        "updates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/update"
+          }
+        },
+        "issue_events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/issueEvent"
+          }
+        }
+      },
+      "required": [
+        "updates",
+        "issue_events"
+      ],
+      "additionalProperties": false
+    },
+    "proposal": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expected_parent_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "context_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "delta": {
+          "$ref": "#/$defs/delta"
+        }
+      },
+      "required": [
+        "step",
+        "expected_parent_hash",
+        "context_hash",
+        "delta"
+      ],
+      "additionalProperties": false
+    },
+    "conversationSource": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "limitations": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_id",
+        "title",
+        "text",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "claim": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": {
+          "enum": [
+            "recorded",
+            "inference",
+            "clarification"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evidence"
+          }
+        }
+      },
+      "required": [
+        "text",
+        "basis",
+        "evidence"
+      ],
+      "additionalProperties": false
+    },
+    "exchange": {
+      "type": "object",
+      "properties": {
+        "request_id": {
+          "$ref": "#/$defs/id"
+        },
+        "actor": {
+          "enum": [
+            "human",
+            "agent"
+          ]
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "answer_kind": {
+          "enum": [
+            "recorded",
+            "derived",
+            "insufficient",
+            "clarification"
+          ]
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/claim"
+          }
+        },
+        "added_sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/conversationSource"
+          }
+        }
+      },
+      "required": [
+        "request_id",
+        "actor",
+        "question",
+        "answer",
+        "answer_kind",
+        "claims",
+        "added_sources"
+      ],
+      "additionalProperties": false
+    },
+    "run": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1"
+        },
+        "run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "kind": {
+          "const": "run"
+        },
+        "document": {
+          "$ref": "#/$defs/document"
+        },
+        "reader": {
+          "$ref": "#/$defs/reader"
+        },
+        "config": {
+          "$ref": "#/$defs/config"
+        },
+        "input_digest": {
+          "$ref": "#/$defs/hash"
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "created_at",
+        "hash",
+        "kind",
+        "document",
+        "reader",
+        "config",
+        "input_digest"
+      ],
+      "additionalProperties": false
+    },
+    "step": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1"
+        },
+        "run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "kind": {
+          "const": "step"
+        },
+        "step": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "parent_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "context_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "proposal_digest": {
+          "$ref": "#/$defs/hash"
+        },
+        "delta": {
+          "$ref": "#/$defs/delta"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/snapshot"
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "created_at",
+        "hash",
+        "kind",
+        "step",
+        "parent_hash",
+        "context_hash",
+        "proposal_digest",
+        "delta",
+        "snapshot"
+      ],
+      "additionalProperties": false
+    },
+    "session": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1"
+        },
+        "run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "kind": {
+          "const": "session"
+        },
+        "session_id": {
+          "$ref": "#/$defs/id"
+        },
+        "anchor_step": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "anchor_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "mode": {
+          "enum": [
+            "base",
+            "dialogue",
+            "editorial"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "created_at",
+        "hash",
+        "kind",
+        "session_id",
+        "anchor_step",
+        "anchor_hash",
+        "mode"
+      ],
+      "additionalProperties": false
+    },
+    "exchangeRecord": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "0.1"
+        },
+        "run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "kind": {
+          "const": "exchange"
+        },
+        "session_id": {
+          "$ref": "#/$defs/id"
+        },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "parent_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "exchange_digest": {
+          "$ref": "#/$defs/hash"
+        },
+        "exchange": {
+          "$ref": "#/$defs/exchange"
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "created_at",
+        "hash",
+        "kind",
+        "session_id",
+        "sequence",
+        "parent_hash",
+        "exchange_digest",
+        "exchange"
+      ],
+      "additionalProperties": false
+    },
+    "request": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "create"
+            },
+            "document": {
+              "$ref": "#/$defs/document"
+            },
+            "reader": {
+              "$ref": "#/$defs/reader"
+            },
+            "config": {
+              "$ref": "#/$defs/config"
+            }
+          },
+          "required": [
+            "op",
+            "document",
+            "reader",
+            "config"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "list"
+            },
+            "input_digest": {
+              "$ref": "#/$defs/hash"
+            }
+          },
+          "required": [
+            "op"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "context"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "op",
+            "run_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "commit"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "proposal": {
+              "$ref": "#/$defs/proposal"
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "proposal"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "get"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "step": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "registers": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "understanding",
+                  "expectations",
+                  "uncertainties",
+                  "vocabulary",
+                  "frame",
+                  "load"
+                ]
+              }
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "step"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "query_context"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "step": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "session_id": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "step"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "compare"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "first": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "second": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "first",
+            "second"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "open_session"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "step": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "mode": {
+              "enum": [
+                "base",
+                "dialogue",
+                "editorial"
+              ]
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "step",
+            "mode"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "conversation"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "session_id": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "session_id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "append_exchange"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            },
+            "session_id": {
+              "$ref": "#/$defs/id"
+            },
+            "expected_head_hash": {
+              "$ref": "#/$defs/hash"
+            },
+            "exchange": {
+              "$ref": "#/$defs/exchange"
+            }
+          },
+          "required": [
+            "op",
+            "run_id",
+            "session_id",
+            "expected_head_hash",
+            "exchange"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "op": {
+              "const": "verify"
+            },
+            "run_id": {
+              "$ref": "#/$defs/id"
+            }
+          },
+          "required": [
+            "op",
+            "run_id"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

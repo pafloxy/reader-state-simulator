@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "reader-state.preparation-binding.v1"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "preparation_id": {
+      "type": "string",
+      "pattern": "^prep-[0-9a-f]{64}$"
+    },
+    "preparation": {
+      "$ref": "preparation.schema.json"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "manifest_hash",
+    "preparation_id",
+    "preparation",
+    "hash"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Run to preparation binding"
+}

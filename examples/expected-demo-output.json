@@ -1,0 +1,259 @@
+{
+  "fixture": "authored; no live model invoked",
+  "run_id": "run-17ea2eed443d475bbffbf134280fdf3b",
+  "base_session_id": "session-d15275b458034e93a4eab8afa3413053",
+  "dialogue_session_id": "session-091a51bed01646ae9eb1d9344cc99342",
+  "at_L3": {
+    "run_id": "run-17ea2eed443d475bbffbf134280fdf3b",
+    "step": 3,
+    "position": "L3",
+    "snapshot_hash": "b1267dc32cec7ec2c7c4164f75e2b6a75a13ac232dc72c715c2a0456e22294e4",
+    "state": {
+      "understanding": {
+        "K0.1": {
+          "evidence": [
+            {
+              "kind": "background",
+              "ref": "b1"
+            }
+          ],
+          "justification": "background",
+          "meaning": "understood",
+          "text": "A set supports membership tests; a directed path follows the directions of its edges."
+        },
+        "K1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "u0001"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "understood",
+          "text": "The goal is to find vertices reachable from the start."
+        },
+        "K2": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "u0002"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "understood",
+          "text": "pending stores vertices waiting to be explored; it starts with the start vertex."
+        },
+        "K3": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "u0003"
+            }
+          ],
+          "justification": "explicit-definition",
+          "meaning": "partial",
+          "text": "A set named seen is initialized with the start vertex. Its update and use rules have not yet been stated."
+        }
+      },
+      "expectations": {
+        "E1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "u0003"
+            }
+          ],
+          "text": "Explain when seen is updated and how it affects scheduling."
+        }
+      },
+      "uncertainties": {},
+      "vocabulary": {
+        "V1": {
+          "evidence": [
+            {
+              "kind": "document",
+              "ref": "u0003"
+            }
+          ],
+          "status": "named",
+          "term": "seen",
+          "text": "seen is named and initialized; its operational role is not yet explained."
+        }
+      },
+      "frame": {},
+      "load": {}
+    },
+    "issues": {
+      "Q1.L3": {
+        "issue_id": "Q1.L3",
+        "introduced_at": "L3",
+        "text": "What is seen used for, and when is it updated?",
+        "category": "missing-explanation",
+        "status": "open",
+        "last_changed_step": 3,
+        "last_reason": "Only its name and initial contents are given.",
+        "evidence": [
+          {
+            "kind": "document",
+            "ref": "u0003"
+          }
+        ]
+      }
+    },
+    "retrieval": "exact",
+    "model_calls": 0
+  },
+  "comparison_L3_L5": {
+    "run_id": "run-17ea2eed443d475bbffbf134280fdf3b",
+    "first": 3,
+    "second": 5,
+    "scope": "editorial-comparison",
+    "changes": {
+      "understanding": {
+        "added": {
+          "K4": {
+            "evidence": [
+              {
+                "kind": "document",
+                "ref": "u0004"
+              }
+            ],
+            "justification": "explicit-definition",
+            "meaning": "partial",
+            "text": "Exploration considers outgoing neighbors for scheduling; the selection condition is still unspecified."
+          }
+        },
+        "removed": {},
+        "changed": {
+          "K3": {
+            "before": {
+              "evidence": [
+                {
+                  "kind": "document",
+                  "ref": "u0003"
+                }
+              ],
+              "justification": "explicit-definition",
+              "meaning": "partial",
+              "text": "A set named seen is initialized with the start vertex. Its update and use rules have not yet been stated."
+            },
+            "after": {
+              "evidence": [
+                {
+                  "kind": "document",
+                  "ref": "u0005"
+                }
+              ],
+              "justification": "supported-argument",
+              "meaning": "understood",
+              "text": "seen records vertices already scheduled. Membership is tested before scheduling and insertion happens immediately, so a vertex is not scheduled twice."
+            }
+          }
+        }
+      },
+      "expectations": {
+        "added": {},
+        "removed": {
+          "E1": {
+            "evidence": [
+              {
+                "kind": "document",
+                "ref": "u0003"
+              }
+            ],
+            "text": "Explain when seen is updated and how it affects scheduling."
+          }
+        },
+        "changed": {}
+      },
+      "uncertainties": {
+        "added": {},
+        "removed": {},
+        "changed": {}
+      },
+      "vocabulary": {
+        "added": {},
+        "removed": {},
+        "changed": {
+          "V1": {
+            "before": {
+              "evidence": [
+                {
+                  "kind": "document",
+                  "ref": "u0003"
+                }
+              ],
+              "status": "named",
+              "term": "seen",
+              "text": "seen is named and initialized; its operational role is not yet explained."
+            },
+            "after": {
+              "evidence": [
+                {
+                  "kind": "document",
+                  "ref": "u0005"
+                }
+              ],
+              "status": "applied",
+              "term": "seen",
+              "text": "seen is the membership guard for scheduling, updated immediately on scheduling."
+            }
+          }
+        }
+      },
+      "frame": {
+        "added": {},
+        "removed": {},
+        "changed": {}
+      },
+      "load": {
+        "added": {},
+        "removed": {},
+        "changed": {}
+      }
+    },
+    "issues_before": {
+      "Q1.L3": {
+        "issue_id": "Q1.L3",
+        "introduced_at": "L3",
+        "text": "What is seen used for, and when is it updated?",
+        "category": "missing-explanation",
+        "status": "open",
+        "last_changed_step": 3,
+        "last_reason": "Only its name and initial contents are given.",
+        "evidence": [
+          {
+            "kind": "document",
+            "ref": "u0003"
+          }
+        ]
+      }
+    },
+    "issues_after": {
+      "Q1.L3": {
+        "issue_id": "Q1.L3",
+        "introduced_at": "L3",
+        "text": "What is seen used for, and when is it updated?",
+        "category": "missing-explanation",
+        "status": "resolved",
+        "last_changed_step": 5,
+        "last_reason": "The membership guard and immediate insertion rule answer the earlier question.",
+        "evidence": [
+          {
+            "kind": "document",
+            "ref": "u0005"
+          }
+        ]
+      }
+    },
+    "model_calls": 0
+  },
+  "verification": {
+    "ok": true,
+    "run_id": "run-17ea2eed443d475bbffbf134280fdf3b",
+    "steps": 5,
+    "complete": true,
+    "sessions": 2,
+    "checked": "structure, references, hash chains, deterministic replay; not semantic fidelity or host isolation"
+  }
+}
